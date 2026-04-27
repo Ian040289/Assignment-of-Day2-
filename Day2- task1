@@ -1,17 +1,17 @@
 D1-----------A1------------P1
 D1 
- conf t
- vlan 2
- name BDO
- exit
- inter vlan 2
- no shut
- ip address 172.16.0.33 255.255.255.224
- exit
- ip dhcp pool BDO
- NETWORK 172.16.0.32 255.255.255.224
- DEFAULT-ROUTER  172.16.0.33
- END
+conf t
+vlan 2
+name BDO
+exit
+inter vlan 2
+no shut
+ip address 172.16.0.33 255.255.255.224
+exit
+ip dhcp pool BDO
+network 172.16.0.32 255.255.255.224
+default-router 172.16.0.33
+END
 
 ----------
 
@@ -19,13 +19,13 @@ A1
 conf t
 inter e0/0
 no shut
- swithport access vlan 2
-
+swicthport access vlan 2
+swicthport mode access
 ------------
 
 P1
 conf t
-intr e0/0
+inter e0/0
 no shut 
 ip address dhcp
 
@@ -35,19 +35,22 @@ D2-----------A2------------P2
 
 
 D2 
- conf t
- vlan 3
- name BPI
- exit
- inter vlan 3
- no shut
- ip address 10.0.0.2.1 255.255.255.254
- exit
- ip dhcp pool BPI
- ip dhcp excluded-add 10.0.2.1 10.0.2.100
- NETWORK 10.0.0.2.9 255.255.255.254
- DEFAULT-ROUTER  10.0.0.2.1
- END
+conf t
+vlan 3
+name BPI
+exit
+inter vlan 3
+no shut
+ip address 10.0.32.1 255.255.224.0
+exit
+
+ip dhcp excluded-add 10.0.32.1 10.0.32.100
+
+ip dhcp pool BPI.COM.PH
+network 10.0.32.0 255.255.224.0
+default-router 10.0.32.1
+
+END
 
 ----------
 
@@ -55,13 +58,13 @@ A2
 conf t
 inter e1/0
 no shut
- swithport access vlan 3
-
+switchport access vlan 3
+switchport mode access
 ------------
 
 P2
 conf t
-intr e1/0
+inter e1/0
 no shut 
 ip address dhcp
 
@@ -71,31 +74,31 @@ D1-----------D2------------S1
 
 D1 
 conf t
- vlan 4
- name 
-PSBANK
+vlan 4
+name PSBANK
 exit
- inter vlan 4
- no shut
- ip address 172.16.0.17 255.255.255.240
- exit
- ip dhcp pool PSBANK
- NETWORK 172.16.0.17 255.255.255.240
- DEFAULT-ROUTER  172.16.0.16
- END
+inter vlan 4
+no shut
+ip address 172.16.0.17 255.255.255.240
+exit
+
+ip dhcp pool PSBANK
+network 172.16.0.17 255.255.255.240
+default-router  172.16.0.16
+end
 
 ----------
 
 D2
 conf t
-inter e1/1
+inter e1/0
 no shut
- swithport access vlan 4
-
+switchport access vlan 4
+switchport mode access
 ------------
 
 S2
 conf t
-intr e1/1
+inter e1/0
 no shut 
 ip address dhcp
