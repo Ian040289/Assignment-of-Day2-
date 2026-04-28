@@ -1,4 +1,18 @@
 D1-----------A1------------P1
+
+BDO VPN: 25WFH
+172.16.0.0/16
+VLAN 2 
+VALAN NAME BDO
+Network address:172.16.0.32 255.255.255.224
+1st Address: 172.16.0.33 /27
+Last Address: 172.16.0.63 /27
+Broadcast address: 172.16.0.64 /27
+Bits:5
+Subtract: 32-5= /27
+
+
+
 D1 
 conf t
 vlan 2
@@ -19,8 +33,8 @@ A1
 conf t
 inter e0/0
 no shut
-swicthport access vlan 2
-swicthport mode access
+switchport access vlan 2
+switchport mode access
 ------------
 
 P1
@@ -31,6 +45,18 @@ ip address dhcp
 
 
 D2-----------A2------------P2
+BPI (5000 Employee)
+10.0.0.0/8
+VLAN 3
+VALAN NAME BPI
+Network address:10.0.32.0
+Subnet:  255.255.224.0
+1st Address: 10.0.32.1 /19
+Last Address: 10.0.63.255 /19
+Broadcast address: 10.0.64.0 /19
+
+Bits:13
+Subtract: 32-13= /19
 
 
 
@@ -70,6 +96,35 @@ ip address dhcp
 
 
 D1-----------D2------------S1
+PSBANK  VPN (6WFH)
+D1-D2-S1
+172.16.0.0/16
+VLAN 4
+VALAN NAME PSBANK
+Network address:172.16.0.8
+Subnet: 255.255.255.248
+1st Address: 172.16.0.9/29
+Last Address: 172.16.0.15/29
+Broadcast address: 172.16.0.16/29 
+
+Bits: 3
+Subtract: 32-3= /29
+
+D1-------------------D2---------------S2
+
+PSBANK  VPN (6WFH)
+D1-D2-S1
+172.16.0.0/16
+VLAN 4
+VALAN NAME PSBANK
+Network address:172.16.0.8
+Subnet: 255.255.255.248
+1st Address: 172.16.0.9/29
+Last Address: 172.16.0.15/29
+Broadcast address: 172.16.0.16/29 
+
+Bits: 3
+Subtract: 32-3= /29
 
 
 D1 
